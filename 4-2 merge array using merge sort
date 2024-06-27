@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to merge two sorted arrays into a single sorted array
+void merge(int *nums1, int m, int *nums2, int n, int *merged) {
+    int i = 0, j = 0, k = 0;
+
+    // Merge the arrays into a single sorted array
+    while (i < m && j < n) {
+        if (nums1[i] >= nums2[j]) {
+            merged[k++] = nums1[i++];
+        } else {
+            merged[k++] = nums2[j++];
+        }
+    }
+
+    // Copy the remaining elements
+    while (i < m) {
+        merged[k++] = nums1[i++];
+    }
+    while (j < n) {
+        merged[k++] = nums2[j++];
+    }
+}
+
+// Function to print an array
+void printArray(int *arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int nums1[] = {3, 8, 1, 9};
+    int nums2[] = {4, -2, 0, 7};
+    int m = sizeof(nums1) / sizeof(nums1[0]);
+    int n = sizeof(nums2) / sizeof(nums2[0]);
+
+    // Sort the arrays in non-increasing order (already sorted)
+
+    // Create merged array
+    int merged[m + n];
+
+    // Merge the arrays
+    merge(nums1, m, nums2, n, merged);
+
+    // Print the merged array
+    printf("Merged array: ");
+    printArray(merged, m + n);
+
+    return 0;
+}
