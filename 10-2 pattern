@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+// Function to print the pattern
+void printPattern(int n) {
+    // Outer loop for rows
+    for (int i = 1; i <= n; i++) {
+        // Inner loop for columns
+        for (int j = 1; j <= i; j++) {
+            printf("%d ", j);
+        }
+        printf("\n");
+    }
+}
+
+// Main function to take input and call printPattern function
+int main() {
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+    
+    printPattern(n);
+    
+    return 0;
+}
