@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+// Function to check if a string is palindrome
+bool isPalindromeString(char str[]) {
+    int left = 0;
+    int right = strlen(str) - 1;
+    
+    while (right > left) {
+        if (str[left++] != str[right--]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Function to check if a number is palindrome
+bool isPalindromeNumber(int num) {
+    int originalNum = num;
+    int reversedNum = 0;
+
+    while (num > 0) {
+        reversedNum = reversedNum * 10 + num % 10;
+        num /= 10;
+    }
+
+    return originalNum == reversedNum;
+}
+
+int main() {
+    int caseNum;
+    printf("Enter Case (1 for String, 2 for Number): ");
+    scanf("%d", &caseNum);
+
+    if (caseNum == 1) {
+        char str[100];
+        printf("Enter String: ");
+        scanf("%s", str);
+
+        if (isPalindromeString(str)) {
+            printf("Palindrome\n");
+        } else {
+            printf("Not Palindrome\n");
+        }
+    } else if (caseNum == 2) {
+        int num;
+        printf("Enter Number: ");
+        scanf("%d", &num);
+
+        if (isPalindromeNumber(num)) {
+            printf("Palindrome\n");
+        } else {
+            printf("Not Palindrome\n");
+        }
+    } else {
+        printf("Invalid Case\n");
+    }
+
+    return 0;
+}
+
+
+Set 7
