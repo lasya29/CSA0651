@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+// Function to compute the factorial using recursion
+int factorial(int n) {
+    // Base case: factorial of 0 is 1
+    if (n == 0) {
+        return 1;
+    }
+    // Base case: no factorial for negative numbers
+    else if (n < 0) {
+        return -1; // indicating illegal input
+    }
+    // Recursive case: n! = n * (n-1)!
+    else {
+        return n * factorial(n - 1);
+    }
+}
+
+int main() {
+    // Test cases
+    int numA = 4;
+    int numB = -3;
+    int numC = 6;
+
+    // Calculate factorial and print results
+    int factA = factorial(numA);
+    if (factA != -1) {
+        printf("Factorial of %d is %d\n", numA, factA);
+    } else {
+        printf("Invalid input for %d\n", numA);
+    }
+
+    int factB = factorial(numB);
+    if (factB != -1) {
+        printf("Factorial of %d is %d\n", numB, factB);
+    } else {
+        printf("Invalid input for %d\n", numB);
+    }
+
+    int factC = factorial(numC);
+    if (factC != -1) {
+        printf("Factorial of %d is %d\n", numC, factC);
+    } else {
+        printf("Invalid input for %d\n", numC);
+    }
+
+    return 0;
+}
