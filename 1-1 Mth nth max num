@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+int main() {
+    // Test cases
+    int test_cases[5][5] = {
+        {16, 16, 16, 16, 16},
+        {0, 0, 0, 0},
+        {-12, -78, -35, -42, -85},
+        {15, 19, 34, 56, 12},
+        {85, 45, 65, 75, 95}
+    };
+    int sizes[] = {5, 4, 5, 5, 5};
+    int M_values[] = {0, 1, 3, 6, 5};
+    int N_values[] = {1, 2, 3, -3, 2};
+
+    for (int i = 0; i < 5; i++) {
+        int *array = test_cases[i];
+        int size = sizes[i];
+        int M = M_values[i];
+        int N = N_values[i];
+
+        if (M <= 0 || N <= 0 || M > size || N > size) {
+            printf("Test case %d: Illegal input\n", i + 1);
+            continue;
+        }
+
+        // Sort array
+        qsort(array, size, sizeof(int), compare);
+
+        // Find M-th maximum (1-based index)
+        int Mth_max = array[size - M];
+
+        // Find N-th minimum (1-based index)
+        int Nth_min = array[N - 1];
+
+        // Calculate sum and difference
+        int sum = Mth_max + Nth_min;
+        int difference = Mth_max - Nth_min;
+
+        printf("Test case %d: Sum = %d, Difference = %d\n", i + 1, sum, difference);
+    }
+
+    return 0;
+}
