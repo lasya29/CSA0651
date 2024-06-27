@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <ctype.h>
+
+// Structure to hold the min and max values
+struct Pair {
+    int min;
+    int max;
+};
+
+// Function to find the min and max using divide and conquer
+struct Pair findMinMax(int arr[], int low, int high, int* comparisonCount) {
+    struct Pair minmax, left, right;
+    int mid;
+
+    // If there is only one element
+    if (low == high) {
+        minmax.min = arr[low];
+        minmax.max = arr[low];
+        return minmax;
+    }
+
+    // If there are two elements
+    if (high == low + 1) {
+        (*comparisonCount)++;
+        if (arr[low] > arr[high]) {
+            minmax.max = arr[low];
+            minmax.min = arr[high];
+        } else {
+            minmax.max = arr[high];
+            minmax.min = arr[low];
+        }
+        return minmax;
+    }
+
+    // If there are more than two elements
+    mid = (low + high) / 2;
+    left = findMinMax(arr, low, mid, comparisonCount);
+    right = findMinMax(arr, mid + 1, high, comparisonCount);
+
+    // Compare minimums of two halves
+    (*comparisonCount)++;
+    if (left.min < right.min) {
+        minmax.min = left.min;
+    } else {
+        minmax.min = right.min;
+    }
+
+    // Compare maximums of two halves
+    (*comparisonCount)++;
+    if (left.max > right.max) {
+        minmax.max = left.max;
+    } else {
+        minmax.max = right.max;
+    }
+
+    return minmax;
+}
+
+// Function to check if the array contains valid integers
+int isValidArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == INT_MAX || arr[i] == INT_MIN) {
+            return 0; // Invalid input
+        }
+    }
+    return 1; // Valid input
+}
+
+int main() {
+    // Test case A
+    int arrA[] = {23, 45, 6, 8, -9, 44, 7, 8};
+    int sizeA = sizeof(arrA) / sizeof(arrA[0]);
+    int comparisonCountA = 0;
+
+    if (isValidArray(arrA, sizeA)) {
+        struct Pair minmaxA = findMinMax(arrA, 0, sizeA - 1, &comparisonCountA);
+        printf("Test case A: Min val = %d, Max val = %d\n", minmaxA.min, minmaxA.max);
+        printf("Comparisons made: %d\n", comparisonCountA);
+    } else {
+        printf("Test case A: Illegal input\n");
+    }
+
+    // Test case B
+    int arrB[] = {8, -5, 7, 2, 6, 0, 1, 9};
+    int sizeB = sizeof(arrB) / sizeof(arrB[0]);
+    int comparisonCountB = 0;
+
+    if (isValidArray(arrB, sizeB)) {
+        struct Pair minmaxB = findMinMax(arrB, 0, sizeB - 1, &comparisonCountB);
+        printf("Test case B: Min val = %d, Max val = %d\n", minmaxB.min, minmaxB.max);
+        printf("Comparisons made: %d\n", comparisonCountB);
+    } else {
+        printf("Test case B: Illegal input\n");
+    }
+
+    // Test case C (invalid input)
+    int arrC[] = {45, INT_MAX, 9, 8, 4, 7, 11, 22, 16};
+    int sizeC = sizeof(arrC) / sizeof(arrC[0]);
+    int comparisonCountC = 0;
+
+    if (isValidArray(arrC, sizeC)) {
+        struct Pair minmaxC = findMinMax(arrC, 0, sizeC - 1, &comparisonCountC);
+        printf("Test case C: Min val = %d, Max val = %d\n", minmaxC.min, minmaxC.max);
+        printf("Comparisons made: %d\n", comparisonCountC);
+    } else {
+        printf("Test case C: Illegal input\n");
+    }
+
+    return 0;
+}
