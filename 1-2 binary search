@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to compare elements for qsort
+int compare(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+// Function to perform binary search
+int binarySearch(int arr[], int size, int target) {
+    int left = 0;
+    int right = size - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        
+        // Check if target is present at mid
+        if (arr[mid] == target)
+            return mid;
+        
+        // If target greater, ignore left half
+        if (arr[mid] < target)
+            left = mid + 1;
+        
+        // If target smaller, ignore right half
+        else
+            right = mid - 1;
+    }
+    
+    // Target not present in array
+    return -1;
+}
+
+int main() {
+    // Test case 1
+    int nums1[] = {45, 4, 23, -11, 20, 5, 10, 50};
+    int size1 = sizeof(nums1) / sizeof(nums1[0]);
+    int target1 = 23;
+    
+    // Sort the array
+    qsort(nums1, size1, sizeof(int), compare);
+    
+    // Perform binary search
+    int result1 = binarySearch(nums1, size1, target1);
+    if (result1 != -1)
+        printf("Test case 1: Found at position %d\n", result1);
+    else
+        printf("Test case 1: Not found\n");
+    
+    // Test case 2
+    int nums2[] = {8, -2, 11, 8, 6, 3, 10, 0};
+    int size2 = sizeof(nums2) / sizeof(nums2[0]);
+    int target2 = 2;
+    
+    // Sort the array
+    qsort(nums2, size2, sizeof(int), compare);
+    
+    // Perform binary search
+    int result2 = binarySearch(nums2, size2, target2);
+    if (result2 != -1)
+        printf("Test case 2: Found at position %d\n", result2);
+    else
+        printf("Test case 2: Not found\n");
+    
+    return 0;
+}
