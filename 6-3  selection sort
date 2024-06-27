@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+// Function to perform Selection Sort
+void selectionSort(int arr[], int n) {
+    int i, j, min_idx;
+
+    // One by one move boundary of unsorted subarray
+    for (i = 0; i < n-1; i++) {
+        // Find the minimum element in unsorted array
+        min_idx = i;
+        for (j = i+1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+
+        // Swap the found minimum element with the first element of the unsorted array
+        int temp = arr[min_idx];
+        arr[min_idx] = arr[i];
+        arr[i] = temp;
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    // Test Case A
+    int arrA[] = {10, 5, 80, -2, 15, 23, 45};
+    int nA = sizeof(arrA) / sizeof(arrA[0]);
+    printf("Input A: ");
+    printArray(arrA, nA);
+
+    selectionSort(arrA, nA);
+
+    printf("Sorted Output A: ");
+    printArray(arrA, nA);
+
+    // Test Case B
+    int arrB[] = {12, 3, 0, 34, -11, 2, 8};
+    int nB = sizeof(arrB) / sizeof(arrB[0]);
+    printf("\nInput B: ");
+    printArray(arrB, nB);
+
+    selectionSort(arrB, nB);
+
+    printf("Sorted Output B: ");
+    printArray(arrB, nB);
+
+    return 0;
+}
