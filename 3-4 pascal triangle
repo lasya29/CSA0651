@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+// Function to print Pascal's Triangle
+void printPascal(int rows) {
+    int arr[rows][rows];
+
+    // Initialize the array with zeros
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j <= i; j++) {
+            // The first and last values in every row are 1
+            if (j == 0 || j == i) {
+                arr[i][j] = 1;
+            } else {
+                // Other values are sum of values just above and left of above
+                arr[i][j] = arr[i-1][j-1] + arr[i-1][j];
+            }
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int rows = 5;
+    printPascal(rows);
+    return 0;
+}
