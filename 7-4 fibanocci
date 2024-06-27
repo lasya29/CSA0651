@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+// Function to find the sum of even Fibonacci numbers till n
+long long evenFibSum(int n) {
+    if (n <= 0) return 0;
+
+    long long fib1 = 0, fib2 = 1;
+    long long sum = 0;
+
+    while (fib2 <= n) {
+        // Check if current Fibonacci number (fib2) is even
+        if (fib2 % 2 == 0) {
+            sum += fib2;
+        }
+
+        // Calculate the next Fibonacci numbers
+        long long next = fib1 + fib2;
+        fib1 = fib2;
+        fib2 = next;
+    }
+
+    return sum;
+}
+
+// Main function to test the program
+int main() {
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+
+    // Calculate the sum of even Fibonacci numbers till n
+    long long result = evenFibSum(n);
+
+    // Print the result
+    printf("Sum of even Fibonacci numbers till %d is: %lld\n", n, result);
+
+    return 0;
+}
