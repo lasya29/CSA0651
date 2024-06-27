@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+// Function to check if a number is perfect
+bool isPerfect(int num) {
+    if (num <= 1) {
+        return false;
+    }
+
+    int sum = 1; // Initialize sum of proper divisors
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            if (i * i != num) {
+                sum += i + num / i;
+            } else {
+                sum += i;
+            }
+        }
+    }
+
+    return sum == num;
+}
+
+// Function to print the first n perfect numbers
+void printPerfectNumbers(int n) {
+    int count = 0;
+    int num = 2; // Starting from 2 because 1 is not considered a perfect number
+
+    printf("First %d perfect numbers are: ", n);
+    while (count < n) {
+        if (isPerfect(num)) {
+            printf("%d", num);
+            count++;
+            if (count < n) {
+                printf(", ");
+            }
+        }
+        num++;
+    }
+    printf("\n");
+}
+
+int main() {
+    // Test cases
+    int N;
+
+    // Test case 1
+    N = 0;
+    printPerfectNumbers(N);
+
+    // Test case 2
+    N = 5;
+    printPerfectNumbers(N);
+
+    // Test case 3
+    N = -2;
+    printPerfectNumbers(N);
+
+    // Test case 4
+    N = -5;
+    printPerfectNumbers(N);
+
+    // Test case 5
+    N = 0.2; // Not a valid input, but will handle in code
+    printPerfectNumbers(N);
+
+    return 0;
+}
