@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+// Function to calculate Fibonacci numbers up to n and return the sum of even Fibonacci numbers
+unsigned long long int evenFibSum(int n) {
+    if (n <= 0) {
+        return 0;
+    }
+
+    unsigned long long int a = 0; // F(0)
+    unsigned long long int b = 1; // F(1)
+    unsigned long long int fib;
+    unsigned long long int sum = 0;
+
+    // Special case for F(0)
+    if (n >= 0 && a % 2 == 0) {
+        sum += a;
+    }
+
+    // Special case for F(1)
+    if (n >= 1 && b % 2 == 0) {
+        sum += b;
+    }
+
+    // Calculate Fibonacci numbers and sum even ones
+    for (int i = 2; i <= n; i++) {
+        fib = a + b;
+        a = b;
+        b = fib;
+
+        // Add even Fibonacci numbers to the sum
+        if (fib % 2 == 0) {
+            sum += fib;
+        }
+    }
+
+    return sum;
+}
+
+int main() {
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+
+    unsigned long long int result = evenFibSum(n);
+
+    printf("Sum of even Fibonacci numbers up to %d-th Fibonacci number: %llu\n", n, result);
+
+    return 0;
+}
