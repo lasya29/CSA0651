@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to find the GCD using recursion
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+
+// Function to check if the input is valid
+int isValidInput(int a, int b) {
+    if (a <= 0 || b <= 0)
+        return 0;
+    return 1;
+}
+
+int main() {
+    // Test cases
+    int a1 = 36, b1 = 48;
+    int a2 = 156, b2 = 90;
+    int a3 = -56, b3 = 88;
+
+    if (isValidInput(a1, b1)) {
+        printf("GCD of %d and %d is %d\n", a1, b1, gcd(a1, b1));
+    } else {
+        printf("Illegal input for (%d, %d)\n", a1, b1);
+    }
+
+    if (isValidInput(a2, b2)) {
+        printf("GCD of %d and %d is %d\n", a2, b2, gcd(a2, b2));
+    } else {
+        printf("Illegal input for (%d, %d)\n", a2, b2);
+    }
+
+    if (isValidInput(a3, b3)) {
+        printf("GCD of %d and %d is %d\n", a3, b3, gcd(a3, b3));
+    } else {
+        printf("Illegal input for (%d, %d)\n", a3, b3);
+    }
+
+    return 0;
+}
